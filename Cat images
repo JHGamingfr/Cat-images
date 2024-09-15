@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robux Donation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+        .message {
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+    <script>
+        let robuxFunds = 2443866; // Simulate having 2,443,866 Robux
+
+        function donate() {
+            const username = document.getElementById('username').value;
+            const donationAmount = parseInt(document.getElementById('amount').value);
+
+            if (isNaN(donationAmount) || donationAmount <= 0) {
+                document.getElementById('message').innerText = 'Please enter a valid donation amount.';
+                document.getElementById('message').className = 'message error';
+                return;
+            }
+
+            if (donationAmount > robuxFunds) {
+                document.getElementById('message').innerText = 'Cannot donate. Insufficient Robux funds.';
+                document.getElementById('message').className = 'message error';
+            } else {
+                robuxFunds -= donationAmount;
+                document.getElementById('message').innerText = `Donation successful! Your remaining Robux funds: ${robuxFunds}.`;
+                document.getElementById('message').className = 'message success';
+                setTimeout(() => {
+                    window.location.href = 'https://yourusername.github.io/robux-donation-page/'; // Replace with your actual URL
+                }, 2000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Robux Donation Page</h1>
+        <p>Enter the player's username and the amount of Robux you want to donate:</p>
+        <input type="text" id="username" placeholder="Player's Username">
+        <input type="number" id="amount" placeholder="Amount of Robux" min="1">
+        <button onclick="donate()">Donate Robux</button>
+        <p id="message" class="message"></p>
+    </div>
+</body>
+</html>
